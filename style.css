@@ -1,0 +1,136 @@
+:root {
+    --bg-start: #000000;
+    --bg-mid: #1a1a1a;
+    --bg-end: #27272a;
+    --text-main: #ffffff;
+    --text-muted: #a1a1aa;
+    --text-dim: #d4d4d8;
+    --accent: #3b82f6;
+    --accent-hover: #60a5fa;
+    --card-bg: rgba(12, 12, 15, 0.6);
+    --drop-border: rgba(148, 163, 184, 0.45);
+    --drop-glow: rgba(59, 130, 246, 0.16);
+    --grid: rgba(255, 255, 255, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Fira Code', monospace;
+    background: linear-gradient(to top right, var(--bg-start), var(--bg-mid), var(--bg-end));
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-main);
+    padding: 2rem;
+}
+
+/* Grid Overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.card {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 72rem;
+    min-height: 22rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 3px dashed var(--drop-border);
+    border-radius: 2rem;
+    padding: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0.75rem;
+    border-radius: 1.5rem;
+    background: radial-gradient(circle at 20% 20%, var(--drop-glow), transparent 35%),
+        radial-gradient(circle at 80% 10%, var(--drop-glow), transparent 35%),
+        transparent;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.card-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.bio {
+    font-size: 1rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+.links-section h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.link-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.link-list li a {
+    text-decoration: none;
+    color: var(--accent);
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.link-list li a:hover {
+    color: var(--accent-hover);
+}
+
+.arrow {
+    font-size: 1.1em;
+}
+
+@media (max-width: 640px) {
+    .card {
+        padding: 2rem;
+        gap: 2rem;
+    }
+
+    .card-header h1 {
+        font-size: 2rem;
+    }
+}
