@@ -64,10 +64,7 @@ body {
     z-index: 10;
 }
 
-.about-card.active {
-    /* No longer needed for positioning, but maybe for fade in? */
-    /* Let's keep it simple for now and rely on scroll */
-}
+
 
 /* Ensure it looks good on mobile */
 @media (max-width: 640px) {
@@ -289,4 +286,117 @@ body::before {
     text-align: left;
     z-index: 10;
     margin-bottom: 2rem;
+}
+
+/* Floating Navigation */
+.floating-nav {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: var(--card-bg); /* Match card background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--accent);
+    border-radius: 1rem;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between; /* Separate pages and socials */
+    align-items: center;
+    box-shadow: 4px 4px 0px var(--accent); /* Match card shadow */
+    width: 100%;
+    max-width: 72rem; /* Match card width */
+    overflow-x: auto;
+}
+
+.nav-pages,
+.nav-socials {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+/* Adjust buttons for the nav bar */
+.floating-nav .btn-square,
+.floating-nav .custom-btn {
+    box-shadow: none; /* Remove default shadow for cleaner look in nav */
+    border: 1px solid transparent; /* Cleaner look */
+    background: transparent;
+    height: 3rem; /* Slightly smaller */
+    font-size: 0.9rem;
+}
+
+.floating-nav .btn-square {
+    width: 3rem;
+    border: 1px solid var(--accent); /* Keep border for icons */
+}
+
+.floating-nav .custom-btn {
+    border: 1px solid var(--accent);
+    padding: 0 1rem;
+}
+
+.floating-nav .btn-square:hover,
+.floating-nav .custom-btn:hover,
+.floating-nav .custom-btn.active {
+    background: var(--accent);
+    color: var(--bg-start);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Hide scrollbar for small screens */
+.floating-nav::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ensure content doesn't get hidden behind the nav */
+body {
+    padding-bottom: 6rem;
+}
+
+@media (max-width: 768px) {
+    .floating-nav {
+        bottom: 1rem;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    
+    .floating-nav .btn-square {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .floating-nav .custom-btn {
+        height: 2.5rem;
+        font-size: 0.8rem;
+        padding: 0 0.75rem;
+    }
+}
+
+/* Content Blocks in Projects Section */
+.content-block h3 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--grid);
+    padding-bottom: 0.5rem;
+}
+
+.content-block h4 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.content-block .role {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.content-block .item {
+    margin-bottom: 1rem;
 }
