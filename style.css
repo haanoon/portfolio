@@ -24,11 +24,56 @@ body {
     background: linear-gradient(to top right, var(--bg-start), var(--bg-mid), var(--bg-end));
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
+    color: var(--text-main);
+    cursor: none;
+    /* Hide default cursor */
+}
+
+.fullscreen-section {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--text-main);
     padding: 2rem;
-    cursor: none;
+}
+
+/* ... (rest of the file) ... */
+
+/* About Card Styles */
+.about-card {
+    position: relative; /* Normal flow */
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 72rem; /* Match main card */
+    min-height: 22rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--accent);
+    border-radius: 1rem;
+    padding: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow: 4px 4px 0px var(--accent);
+    text-align: left;
+    z-index: 10;
+}
+
+.about-card.active {
+    /* No longer needed for positioning, but maybe for fade in? */
+    /* Let's keep it simple for now and rely on scroll */
+}
+
+/* Ensure it looks good on mobile */
+@media (max-width: 640px) {
+    body {
+        gap: 5rem; /* Less gap on mobile */
+    }
 }
 
 /* Grid Overlay */
@@ -64,6 +109,19 @@ body::before {
     /* Left align text by default */
     text-align: left;
     justify-content: space-between;
+    animation: slideUpFade 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -194,4 +252,41 @@ body::before {
     width: 100%;
     height: 100%;
     z-index: -1;
+}
+
+/* Custom Cursor */
+#custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* About Card Styles */
+.about-card {
+    position: relative; /* Normal flow */
+    width: 100%;
+    max-width: 72rem; /* Match main card */
+    min-height: 22rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--accent);
+    border-radius: 1rem;
+    padding: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow: 4px 4px 0px var(--accent);
+    text-align: left;
+    z-index: 10;
+    margin-bottom: 2rem;
 }
